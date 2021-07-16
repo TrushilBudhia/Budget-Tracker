@@ -25,10 +25,11 @@ const config = {
       icons: [{
         src: path.resolve("public/icons/icon-192x192.png"),
         sizes: [192, 512],
-        destination: path.join("icons")
+        destination: path.join("assets", "icons")
       }]
     })
   ],
+  // Adding module - babel-loader
   module: {
     rules: [
       {
