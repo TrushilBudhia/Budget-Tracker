@@ -11,7 +11,7 @@ router.post("/api/transaction", async ({ body }, response) => {
   }
 });
 
-router.post("/api/transaction/bulk", ({ body }, response) => {
+router.post("/api/transaction/bulk", async ({ body }, response) => {
   try {
     const dbTransaction = await Transaction.insertMany(body);
     response.json(dbTransaction);
@@ -21,7 +21,7 @@ router.post("/api/transaction/bulk", ({ body }, response) => {
   }
 });
 
-router.get("/api/transaction", (request, response) => {
+router.get("/api/transaction", async (request, response) => {
   try {
     const dbTransaction = await Transaction.find({}).sort({ date: -1 });
     response.json(dbTransaction);
