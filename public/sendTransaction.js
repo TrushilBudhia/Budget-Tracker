@@ -2,7 +2,6 @@ import { populateTotal } from './populateTotal.js'
 import { populateTable } from './populateTable.js'
 import { populateChart } from './populateChart.js'
 
-
 export function sendTransaction(isAdding) {
     let transactions = [];
     let nameEl = document.querySelector("#t-name");
