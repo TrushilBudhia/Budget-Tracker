@@ -1,5 +1,5 @@
 {
-  "name": "budget-app",
+  "name": "budget-tracker-app",
   "version": "1.0.0",
   "description": "An application that allows a user to add expenses and deposits to their budget with or without a connection",
   "main": "server.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TrushilBudhia/Budget-Tracker.git"
+    "url": "git+https://github.com/TrushilBudhia/Budget-Tracker-PWA.git"
   },
   "author": "Trushil Budhia",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TrushilBudhia/Budget-Tracker/issues"
+    "url": "https://github.com/TrushilBudhia/Budget-Tracker-PWA/issues"
   },
-  "homepage": "https://github.com/TrushilBudhia/Budget-Tracker#readme",
+  "homepage": "https://github.com/TrushilBudhia/Budget-Tracker-PWA#readme",
   "dependencies": {
     "compression": "^1.7.4",
     "express": "^4.17.1",
