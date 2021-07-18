@@ -42,14 +42,12 @@ self.addEventListener("activate", function (event) {
 });
 
 self.addEventListener("fetch", function (event) {
-    // If request url includes '/api/', return a fetch request to the API
+    // If not a GET request, return
     if (event.request.method !== "GET") {
         return;
     }
-
-    // handle runtime GET requests for data from /api routes
+    // If request url includes '/api/', return a fetch request to the API
     if (event.request.url.includes("/api/")) {
-        // make network request and fallback to cache if network request fails (offline)
         event.respondWith(
             caches.open(RUNTIME_CACHE).then(cache => {
                 return fetch(event.request)
@@ -68,7 +66,6 @@ self.addEventListener("fetch", function (event) {
         );
         return;
     }
-
 
     // Use cache first for all other requests for performance
     event.respondWith(
