@@ -3,12 +3,16 @@ let db;
 // New db request for a "budget" database.
 const request = indexedDB.open('budget', 1);
 
-request.onupgradeneeded = function (event) {
-  // Object store called "BudgetStore", autoIncrement set to true
-  const db = event.target.result;
-  const BudgetObjectStore = db.createObjectStore("BudgetStore", {
-    autoIncrement: true
-  });
+init();
+
+function init() {
+  request.onupgradeneeded = function (event) {
+    // Object store called "BudgetStore", autoIncrement set to true
+    const db = event.target.result;
+    const BudgetObjectStore = db.createObjectStore("BudgetStore", {
+      autoIncrement: true
+    });
+  };
 };
 
 request.onsuccess = function (event) {
@@ -46,7 +50,7 @@ function checkDatabase() {
 
   getAll.onsuccess = function () {
     if (getAll.result.length > 0) {
-      fetch('/api/transaction', {
+      fetch('/api/transaction/bulk', {
         method: 'POST',
         body: JSON.stringify(getAll.result),
         headers: {
@@ -66,7 +70,7 @@ function checkDatabase() {
         })
         .catch(err => {
           console.log(err);
-      });
+        });
     }
   };
 }
