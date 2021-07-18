@@ -1,8 +1,9 @@
 const FILES_TO_CACHE = [
     "/",
     "/index.html",
-    "/style.css",
-    "/dist/bundle.js",
+    "/assets/css/style.css",
+    "/dist/index.bundle.js",
+    "/dist/db.bundle.js",
     "/dist/manifest.json",
     "/dist/assets/icons/icon_192x192.png",
     "/dist/assets/icons/icon_512x512.png",
@@ -10,8 +11,8 @@ const FILES_TO_CACHE = [
     "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 ];
 
-const STATIC_CACHE = "static-cache-v1";
-const RUNTIME_CACHE = "runtime-cache";
+const STATIC_CACHE = "static-cache-v2";
+const RUNTIME_CACHE = "runtime-cache-v1";
 
 self.addEventListener("install", event => {
     event.waitUntil(

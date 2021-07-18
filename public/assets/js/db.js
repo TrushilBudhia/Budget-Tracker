@@ -1,21 +1,19 @@
 let db;
 
-// New db request for a "budgetTracker" database.
-const request = indexedDB.open('budgetTracker', 1);
+// New db request for a "budget" database.
+const request = indexedDB.open('budget', 1);
 
 request.onupgradeneeded = function (event) {
-  // Object store called "BudgetTransaction", autoIncrement set to true
+  // Object store called "BudgetStore", autoIncrement set to true
   const db = event.target.result;
-  const BudgetObjectStore = db.createObjectStore("BudgetTransaction", {
+  const BudgetObjectStore = db.createObjectStore("BudgetStore", {
     autoIncrement: true
   });
-  BudgetObjectStore.createIndex("nameIndex", "name");
-  BudgetObjectStore.createIndex("valueIndex", "value");
 };
 
 request.onsuccess = function (event) {
   db = event.target.result;
-
+  // Checking if the application is online before reading from database
   if (navigator.onLine) {
     checkDatabase();
   }
@@ -28,27 +26,27 @@ request.onerror = function (event) {
 
 function saveRecord(record) {
   // Creating a transaction on the pending db with readwrite access
-  // Adding record to store with add method.
   const db = request.result;
-  const transaction = db.transaction(["BudgetTransaction"], "readwrite");
-  const budgetObjectStore = transaction.objectStore("BudgetTransaction");
-  const nameIndex = budgetObjectStore.index("nameIndex");
-  const valueIndex = budgetObjectStore.index("valueIndex");
-
+  // Accessing the pending object store
+  const transaction = db.transaction(["BudgetStore"], "readwrite");
+  // Adding record to store with add method.
+  const budgetObjectStore = transaction.objectStore("BudgetStore");
   // Adds data to the objectStore
   budgetObjectStore.add(record);
 }
 
 function checkDatabase() {
-  // Gets all records from store and set to getAll variable
+  // Opening a transaction on the pending db
   const db = request.result;
-  const transaction = db.transaction(["BudgetTransaction"], "readwrite");
-  const budgetObjectStore = transaction.objectStore("BudgetTransaction");
+  const transaction = db.transaction(["BudgetStore"], "readwrite");
+  // Accessing the pending object store
+  const budgetObjectStore = transaction.objectStore("BudgetStore");
+  // Gets all records from store and set to getAll variable
   const getAll = budgetObjectStore.getAll();
 
   getAll.onsuccess = function () {
     if (getAll.result.length > 0) {
-      fetch('/api/transaction/bulk', {
+      fetch('/api/transaction', {
         method: 'POST',
         body: JSON.stringify(getAll.result),
         headers: {
@@ -58,10 +56,12 @@ function checkDatabase() {
       })
         .then((response) => response.json())
         .then(() => {
-          // Clears all items in the store
+          // Opening a transaction on the pending db
           const db = request.result;
-          const transaction = db.transaction(["BudgetTransaction"], "readwrite");
-          const BudgetObjectStore = transaction.objectStore("BudgetTransaction");
+          const transaction = db.transaction(["BudgetStore"], "readwrite");
+          // Accessing the pending object store
+          const BudgetObjectStore = transaction.objectStore("BudgetStore");
+          // Clears all items in the store
           BudgetObjectStore.clear();
         })
         .catch(err => {
