@@ -34,7 +34,7 @@ To install this application select the menu button in the browser (vertical thre
 Enter a deposit or expense transaction via the input fields and the add and subtract buttons. 
 
 ## Assets
-Live demo of the application hosted on Heroku: [Budget Tracker PWA]()
+Live demo of the application hosted on Heroku: [Budget Tracker PWA](https://budget-tracker-pwa-plus.herokuapp.com/)
 
 The following images shows the functionality of the application: 
 
