@@ -38,6 +38,8 @@ Live demo of the application hosted on Heroku: [Budget Tracker PWA](https://budg
 
 The following images shows the functionality of the application: 
 
+![Budget Tracker gif preview.](./assets/images/Budget-Tracker-PWA-preview.gif)
+
 ![Budget Tracker snippet of the input fields.](./assets/images/Budget-Tracker-PWA-preview-1.jpg)
 
 ![Budget Tracker screenshot of the transaction list and chart.](./assets/images/Budget-Tracker-PWA-preview-2.png)
